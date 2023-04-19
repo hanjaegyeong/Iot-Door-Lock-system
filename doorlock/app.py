@@ -1,12 +1,12 @@
 import random
-from flask import Flask,render_template,redirect,url_for,redirect, render_template, request
+from flask import Flask,render_template, render_template, request
 app = Flask(__name__)
 
 #메인 페이지
 @app.route('/',methods=['GET','POST'])
 def main():
     if request.method == 'POST':
-        random_list = list(range(1,11))
+        random_list = list(range(1,11)) #버튼 클릭 -> 첫 번째 패스워드 선택 창
         randoms = random.sample(random_list, 10)
         return render_template('doorlock_one.html', numbers = randoms)
     return render_template('main.html')
@@ -86,4 +86,4 @@ def tmp():
 
 
 if __name__ == '__main__':
-   app.run(host='0.0.0.0', port = 80, debug = True)
+   app.run(port = 5000, debug = True)
