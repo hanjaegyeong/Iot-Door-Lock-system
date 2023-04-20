@@ -6,14 +6,31 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <title>IoT Door Lock System</title>
+    <style>
+
+      div.pad {
+  
+          padding-top: 50px;
+  
+          padding-right: 10px;
+  
+          padding-bottom: 30px;
+  
+          padding-left: 100px;
+  
+      }
+  
+  </style>
     
   </head>
 
   <body>
-        <form action="/one" method="get">
+        <div>
+          <form action="/one" method="get">
           {% for number in numbers %}
-            <input type="submit" value={{number}} name="number" style="height: 100px;width: 150px;font-size:40px;"/>
+            <input type="submit" value={{number}} name="number" style="height: 150px;width: 200px;font-size:40px;"/>
           {% endfor %}
         </form>
+      </div>
   </body>
 </html>
