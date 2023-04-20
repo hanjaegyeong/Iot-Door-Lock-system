@@ -7,10 +7,10 @@
     <title>IoT Door Lock System</title>
     <style>
       div {
-        margin:40px;
+        margin:20px;
       }
       input {
-        height: 115px;width: 180px;font-size:45px;
+        height: 100px;width: 170px;font-size:45px;
       }
     </style>
   </head>
@@ -18,7 +18,7 @@
   <body>
         <form action="/two" method="get">
           {% for number in numbers %}
-            <input type="submit" value={{number}} name="number" style="height: 110px;width: 160px;font-size:45px;"/>
+            <input type="submit" value={{number}} name="number"/>
           {% endfor %}
         </form>
   </body>
