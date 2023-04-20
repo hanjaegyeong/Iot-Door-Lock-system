@@ -6,8 +6,10 @@ app = Flask(__name__)
 @app.route('/',methods=['GET','POST'])
 def main():
     if request.method == 'POST':
-        random_list = list(range(1,11)) #버튼 클릭 -> 첫 번째 패스워드 선택 창
-        randoms = random.sample(random_list, 10)
+        random_list = list(range(0,10)) #버튼 클릭 -> 첫 번째 패스워드 선택 창
+        random_list.append('*')
+        random_list.append('#')
+        randoms = random.sample(random_list, 12)
         return render_template('doorlock_one.html', numbers = randoms)
     return render_template('main.html')
 
@@ -16,8 +18,10 @@ def main():
 def one():
     password = '1' #첫번째 패스워드 설정
     number = request.args["number"]
-    random_list = list(range(1,11))
-    randoms = random.sample(random_list, 10)
+    random_list = list(range(0,10))
+    random_list.append('*')
+    random_list.append('#')
+    randoms = random.sample(random_list, 12)
     if password == number:
         return render_template('doorlock_two.html', numbers = randoms)
     else:
@@ -27,8 +31,10 @@ def one():
 def two():
     password = '2' #두번째 패스워드 설정
     number = request.args["number"]
-    random_list = list(range(1,11))
-    randoms = random.sample(random_list, 10)
+    random_list = list(range(0,10))
+    random_list.append('*')
+    random_list.append('#')
+    randoms = random.sample(random_list, 12)
     if password == number:
         return render_template('doorlock_three.html', numbers = randoms)
     else:
@@ -38,8 +44,10 @@ def two():
 def three():
     password = '3' #세번쨰 패스워드 설정
     number = request.args["number"]
-    random_list = list(range(1,11))
-    randoms = random.sample(random_list, 10)
+    random_list = list(range(0,10))
+    random_list.append('*')
+    random_list.append('#')
+    randoms = random.sample(random_list, 12)
     if password == number:
         return render_template('doorlock_four.html', numbers = randoms)
     else:
@@ -49,8 +57,10 @@ def three():
 def four():
     password = '4' #세번째 패스워드 설정
     number = request.args["number"]
-    random_list = list(range(1,11))
-    randoms = random.sample(random_list, 10)
+    random_list = list(range(0,10))
+    random_list.append('*')
+    random_list.append('#')
+    randoms = random.sample(random_list, 12)
     if password == number:
         return render_template('correct.html')
     else:
@@ -60,20 +70,26 @@ def four():
 #패스워드 틀렸을 때 -> wrong 경로로
 @app.route('/wrong_two',methods=['GET','POST'])
 def wrongTwo():
-    random_list = list(range(1,11))
-    randoms = random.sample(random_list, 10)
+    random_list = list(range(0,10))
+    random_list.append('*')
+    random_list.append('#')
+    randoms = random.sample(random_list, 12)
     return render_template('wrong_three.html', numbers = randoms)
 
 @app.route('/wrong_three',methods=['GET','POST'])
 def wrongThree():
-    random_list = list(range(1,11))
-    randoms = random.sample(random_list, 10)
+    random_list = list(range(0,10))
+    random_list.append('*')
+    random_list.append('#')
+    randoms = random.sample(random_list, 12)
     return render_template('wrong_four.html', numbers = randoms)
 
 @app.route('/wrong_four',methods=['GET','POST'])
 def wrongFour():
-    random_list = list(range(1,11))
-    randoms = random.sample(random_list, 10)
+    random_list = list(range(0,10))
+    random_list.append('*')
+    random_list.append('#')
+    randoms = random.sample(random_list, 12)
     return render_template('wrong.html', numbers = randoms)
 
 
