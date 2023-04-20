@@ -58,7 +58,6 @@ def four():
 
 
 #패스워드 틀렸을 때 -> wrong 경로로
-
 @app.route('/wrong_two',methods=['GET','POST'])
 def wrongTwo():
     random_list = list(range(1,11))
@@ -78,12 +77,10 @@ def wrongFour():
     return render_template('wrong.html', numbers = randoms)
 
 
-@app.route('/tmp', methods=['GET','POST'])
+#wrong.html에서 다시 시작하기 버튼 눌렀을 때
+@app.route('/again', methods=['POST'])
 def tmp():
-    random_list = list(range(1,11))
-    randoms = random.sample(random_list, 10)
-    return render_template('tmp.html', value = randoms, number = randoms)
-
+    return render_template('main.html')
 
 if __name__ == '__main__':
    app.run(port = 5000, debug = True)
