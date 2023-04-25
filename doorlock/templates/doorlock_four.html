@@ -17,10 +17,12 @@
   </head>
 
   <body>
-        <form action="/four" method="get">
-          {% for number in numbers %}
-            <input type="submit" value={{number}} name="number" style="height: 100px;width: 70px;font-size:40px;"/>
-          {% endfor %}
-        </form>
+    <div>
+      <form action="/four" method="get">
+        {% for number in numbers %}
+          <input type="submit" value={{number}} name="number"/>
+        {% endfor %}
+      </form>
+    </div>
   </body>
 </html>

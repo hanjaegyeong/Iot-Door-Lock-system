@@ -17,10 +17,12 @@
   </head>
 
   <body>
-        <form action="/three" method="get">
-          {% for number in numbers %}
-            <input type="submit" value={{number}} name="number"/>
-          {% endfor %}
-        </form>
+    <div>
+      <form action="/three" method="get">
+        {% for number in numbers %}
+          <input type="submit" value={{number}} name="number"/>
+        {% endfor %}
+      </form>
+    </div>
   </body>
 </html>
