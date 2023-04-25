@@ -5,27 +5,23 @@ app = Flask(__name__)
 
 log_list = []
 
-#메인 페이지
-@app.route('/',methods=['GET','POST'])
-def main():
-    if request.method == 'POST':
-        random_list = list(range(0,10)) #버튼 클릭 -> 첫 번째 패스워드 선택화면
-        random_list.append('*')
-        random_list.append('#')
-        randoms = random.sample(random_list, 12)
-        return render_template('doorlock_one.html', numbers = randoms)
-    return render_template('main.html')
+# #메인 페이지
+# @app.route('/',methods=['GET','POST'])
+# def main():
+#     if request.method == 'POST':
+#         random_list = list(range(0,10)) #버튼 클릭 -> 첫 번째 패스워드 선택화면
+#         random_list.append('*')
+#         random_list.append('#')
+#         randoms = random.sample(random_list, 12)
+#         return render_template('doorlock_one.html', numbers = randoms)
+#     return render_template('main.html')
 
 #패스워드 맞을 때
-@app.route('/one',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
 def one():
-    password = '1' #password: 첫번째 패스워드 설정
-    number = request.args["number"] #number: 사용자가 입력한 패스워드
-
-    #입력받은 값, 시간은 로그에 추가
-    now = datetime.now()
-    input_time = now.strftime("%Y-%m-%d %H:%M:%S")
-    log_list.append([number, input_time])
+    #number: 사용자가 입력한 패스워드
+    #첫 화면일 때는(입력받지 않았을 때) default value 10으로 세팅
+    number = request.args.get('number', default = '10', type = str)
 
     #랜덤 순서 만들기
     random_list = list(range(0,10))
@@ -33,10 +29,20 @@ def one():
     random_list.append('#')
     randoms = random.sample(random_list, 12)
 
-    if password == number:
-        return render_template('doorlock_two.html', numbers = randoms)
-    else:
-        return render_template('wrong_two.html', numbers = randoms)
+    #사용자가 입력한 경우
+    if number != '10':
+        password = '1' #password: 첫번째 패스워드 설정
+        print(password, number)
+        #입력받은 값, 시간은 로그에 추가
+        now = datetime.now()
+        input_time = now.strftime("%Y-%m-%d %H:%M:%S")
+        log_list.append([number, input_time])
+
+        if password == number:
+            return render_template('doorlock_two.html', numbers = randoms)
+        else:
+            return render_template('wrong_two.html', numbers = randoms)
+    return render_template('doorlock_one.html', numbers = randoms)
 
 @app.route('/two',methods=['GET','POST'])
 def two():
@@ -108,9 +114,7 @@ def wrongTwo():
 @app.route('/wrong_three',methods=['GET','POST'])
 def wrongThree():
     number = request.args["number"]
-    now = datetime.now()
-    input_time = now.strftime("%Y-%m-%d %H:%M:%S")
-    log_list.append([number, input_time])
+    log_list.append(number)
     
     random_list = list(range(0,10))
     random_list.append('*')
@@ -121,9 +125,7 @@ def wrongThree():
 @app.route('/wrong_four',methods=['GET','POST'])
 def wrongFour():
     number = request.args["number"]
-    now = datetime.now()
-    input_time = now.strftime("%Y-%m-%d %H:%M:%S")
-    log_list.append([number, input_time])
+    log_list.append(number)
     
     random_list = list(range(0,10))
     random_list.append('*')
