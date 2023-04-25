@@ -5,20 +5,9 @@ app = Flask(__name__)
 
 log_list = []
 
-# #메인 페이지
-# @app.route('/',methods=['GET','POST'])
-# def main():
-#     if request.method == 'POST':
-#         random_list = list(range(0,10)) #버튼 클릭 -> 첫 번째 패스워드 선택화면
-#         random_list.append('*')
-#         random_list.append('#')
-#         randoms = random.sample(random_list, 12)
-#         return render_template('doorlock_one.html', numbers = randoms)
-#     return render_template('main.html')
-
-#패스워드 맞을 때
+#메인화면
 @app.route('/',methods=['GET','POST'])
-def one():
+def main():
     #number: 사용자가 입력한 패스워드
     #첫 화면일 때는(입력받지 않았을 때) default value 10으로 세팅
     number = request.args.get('number', default = '10', type = str)
@@ -44,6 +33,8 @@ def one():
             return render_template('wrong_two.html', numbers = randoms)
     return render_template('doorlock_one.html', numbers = randoms)
 
+
+#패스워드 맞을 때
 @app.route('/two',methods=['GET','POST'])
 def two():
     password = '2' #두번째 패스워드 설정
@@ -134,9 +125,14 @@ def wrongFour():
     return render_template('wrong.html', numbers = randoms)
 
 #wrong.html에서 다시 시작하기 버튼 눌렀을 때
-@app.route('/again', methods=['POST'])
+@app.route('/again', methods=['GET', 'POST'])
 def tmp():
-    return render_template('main.html')
+    #랜덤 순서 만들기
+    random_list = list(range(0,10))
+    random_list.append('*')
+    random_list.append('#')
+    randoms = random.sample(random_list, 12)
+    return render_template('doorlock_one.html', numbers = randoms)
 
 #사용자가 입력한 패스워드 전부 확인 가능한 log페이지
 @app.route('/log',methods=['GET','POST'])
