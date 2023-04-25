@@ -10,21 +10,21 @@
           margin-left:260px;font-size:20px;
         }
         input {
-          height: 80px;width: 150px;font-size:40px;
+          height: 50px;width: 100px;font-size:25px;
         }
     </style>
   </head>
 
   <body>
     <div>
-        {% for log in log_list %}
-            <br>
-                input: {{log[0]}} time:  {{log[1]}}
-            <br/>
-        {% endfor %}
-        <form action="/again" method="post">
-        <input type="submit" value="Again" name="input"/>
-        </form>
+      <form action="/again" method="post">
+        <input type="submit" value="Again" name="input" style="margin-left:300px;"/>
+      </form>
+      {% for log in log_list %}
+      <br>
+        input: {{log[0]}} time:  {{log[1]}}
+      <br/>
+      {% endfor %}
     </div>
   </body>
 </html>
