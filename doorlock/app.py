@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 log_list = []
 
-#메인화면
+#메인화면, 첫 번째 패스워드 입력창
 @app.route('/',methods=['GET','POST'])
 def main():
     #number: 사용자가 입력한 패스워드
