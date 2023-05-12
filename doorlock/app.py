@@ -1,6 +1,6 @@
 import random
 from datetime import datetime
-from flask import Flask,render_template, render_template, request
+from flask import Flask, render_template, render_template, request
 app = Flask(__name__)
 
 log_list = []
