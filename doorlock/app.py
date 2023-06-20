@@ -51,7 +51,7 @@ def main():
             return render_template('doorlock_two.html', numbers = randoms)
         else:
             return render_template('wrong_two.html', numbers = randoms)
-    return render_template('doorlock_one.html', numbers = randoms)
+    return render_template('one.html', numbers = randoms)
 
 
 #패스워드 맞을 때
@@ -152,7 +152,7 @@ def tmp():
     random_list.append('*')
     random_list.append('#')
     randoms = random.sample(random_list, 12)
-    return render_template('doorlock_one.html', numbers = randoms)
+    return render_template('one.html', numbers = randoms)
 
 #사용자가 입력한 패스워드 전부 확인 가능한 log페이지
 @app.route('/log',methods=['GET','POST'])
