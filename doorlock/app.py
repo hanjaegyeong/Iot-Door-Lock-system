@@ -1,16 +1,13 @@
 import random
 from datetime import datetime
 from flask import Flask, render_template, render_template, request
-from twilio.rest import Client
+import vonage
 app = Flask(__name__)
 
 log_list = []
 
-# Twilio 계정 정보
-account_sid = "ACc817304d3edeee30db33a5056471545d"
-# 토큰 실시간으로 변경되므로 계속 수정 필요
-auth_token = "6f0bee1ee23bddf8455142a5ea79ac25"
-twilio_phone_number = "+14068127604"
+client = vonage.Client(key="f5208b3e", secret="Z8Lwf9rOOWjuHKyx")
+sms = vonage.Sms(client)
 
 
 #메인화면, 첫 번째 패스워드 입력창
@@ -90,12 +87,18 @@ def four():
     input_time = now.strftime("%Y-%m-%d %H:%M:%S")
     log_list.append([number, input_time])
 
-    client = Client(account_sid, auth_token)
-    message = client.messages.create(
-        body="도어락 잠금이 해제되었습니다.",
-        from_=twilio_phone_number,
-        to="+821051533926"
+    responseData = sms.send_message(
+    {
+        "from": "Vonage APIs",
+        "to": "821051533926",
+        "text": "도어락 잠금이 해제되었습니다.",
+    }
     )
+
+    if responseData["messages"][0]["status"] == "0":
+        print("Message sent successfully.")
+    else:
+        print(f"Message failed with error: {responseData['messages'][0]['error-text']}")
 
     if password == number:
         return render_template('correct.html')
@@ -138,12 +141,18 @@ def wrongFour():
     random_list.append('#')
     randoms = random.sample(random_list, 12)
 
-    client = Client(account_sid, auth_token)
-    message = client.messages.create(
-        body="도어락 패스워드를 입력이 감지되었습니다.",
-        from_=twilio_phone_number,
-        to="+821051533926"
+    responseData = sms.send_message(
+    {
+        "from": "Vonage APIs",
+        "to": "821051533926",
+        "text": "도어락 패스워드 입력이 감지되었습니다.",
+    }
     )
+
+    if responseData["messages"][0]["status"] == "0":
+        print("Message sent successfully.")
+    else:
+        print(f"Message failed with error: {responseData['messages'][0]['error-text']}")
     return render_template('wrong.html', numbers = randoms)
 
 #wrong.html에서 다시 시작하기 버튼 눌렀을 때
