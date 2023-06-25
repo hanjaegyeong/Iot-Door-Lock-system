@@ -3,24 +3,44 @@
   <head>
     <meta charset="utf-8">
     <title>IoT Door Lock System</title>
+    <!-- 부트스트랩 CDN 링크 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
     <style>
-      div {
-        margin-left:40px;
-        margin-top:10px;
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        margin-top: 10px;
+        text-align: center;
       }
-      input {
-        height: 100px;width: 170px;font-size:45px;
+
+      .lock-container {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .lock-button {
+        width: 145px;
+        height: 90px;
+        margin: 7px;
+        border-radius: 10px;
+        font-size: 39px;
+        font-family: "Digital", sans-serif;
+        background-color: #121212; /* 배경색을 동일하게 설정합니다. */
+        color: white; /* 글자색을 흰색으로 설정합니다. */
       }
     </style>
   </head>
 
   <body>
-    <div>
+    <div class="lock-container">
       <form action="/wrong_four" method="get">
         {% for number in numbers %}
-          <input type="submit" value={{number}} name="number"/>
+          <input type="submit" value="{{ number }}" name="number" class="lock-button btn btn-dark">
         {% endfor %}
       </form>
     </div>
+
+    <!-- 부트스트랩 JS 스크립트 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

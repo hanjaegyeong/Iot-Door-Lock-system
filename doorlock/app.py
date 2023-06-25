@@ -5,6 +5,7 @@ import vonage
 app = Flask(__name__)
 
 log_list = []
+password = "1234"
 
 client = vonage.Client(key="f5208b3e", secret="Z8Lwf9rOOWjuHKyx")
 sms = vonage.Sms(client)
@@ -25,14 +26,12 @@ def main():
 
     #사용자가 입력한 경우
     if number != '10':
-        password = '1' #password: 첫번째 패스워드 설정
-        print(password, number)
         #입력받은 값, 시간은 로그에 추가
         now = datetime.now()
         input_time = now.strftime("%Y-%m-%d %H:%M:%S")
         log_list.append([number, input_time])
 
-        if password == number:
+        if password[0] == number:
             return render_template('doorlock_two.html', numbers = randoms)
         else:
             return render_template('wrong_two.html', numbers = randoms)
@@ -42,7 +41,6 @@ def main():
 #패스워드 맞을 때
 @app.route('/two',methods=['GET','POST'])
 def two():
-    password = '2' #두번째 패스워드 설정
     number = request.args["number"]
 
     now = datetime.now()
@@ -54,14 +52,13 @@ def two():
     random_list.append('#')
     randoms = random.sample(random_list, 12)
 
-    if password == number:
+    if password[1] == number:
         return render_template('doorlock_three.html', numbers = randoms)
     else:
         return render_template('wrong_three.html', numbers = randoms)
 
 @app.route('/three',methods=['GET','POST'])
 def three():
-    password = '3' #세번쨰 패스워드 설정
     number = request.args["number"]
 
     now = datetime.now()
@@ -73,34 +70,37 @@ def three():
     random_list.append('#')
     randoms = random.sample(random_list, 12)
 
-    if password == number:
+    if password[2] == number:
         return render_template('doorlock_four.html', numbers = randoms)
     else:
         return render_template('wrong_four.html', numbers = randoms)
 
 @app.route('/four',methods=['GET','POST'])
 def four():
-    password = '4' #세번째 패스워드 설정
+    global password #전역변수 값 변경하기 위해
     number = request.args["number"]
 
     now = datetime.now()
     input_time = now.strftime("%Y-%m-%d %H:%M:%S")
     log_list.append([number, input_time])
 
-    responseData = sms.send_message(
-    {
-        "from": "Vonage APIs",
-        "to": "821051533926",
-        "text": "도어락 잠금이 해제되었습니다.",
-    }
-    )
 
-    if responseData["messages"][0]["status"] == "0":
-        print("Message sent successfully.")
-    else:
-        print(f"Message failed with error: {responseData['messages'][0]['error-text']}")
+    if password[3] == number:
+        random_list = list(range(0,10))
+        password = ''.join(str(s) for s in random.sample(random_list, 4))
+        print(password)
+        responseData = sms.send_message(
+        {
+            "from": "Vonage APIs",
+            "to": "821028429552",
+            "text": "Doorlock has been unlocked. New password: " + password,
+        }
+        )
 
-    if password == number:
+        if responseData["messages"][0]["status"] == "0":
+            print("Message sent successfully.")
+        else:
+            print(f"Message failed with error: {responseData['messages'][0]['error-text']}")
         return render_template('correct.html')
     else:
         return render_template('wrong.html') #마지막에 틀리면 wrong view 리턴
@@ -144,8 +144,8 @@ def wrongFour():
     responseData = sms.send_message(
     {
         "from": "Vonage APIs",
-        "to": "821051533926",
-        "text": "도어락 패스워드 입력이 감지되었습니다.",
+        "to": "821028429552",
+        "text": "Doorlock password input detected.",
     }
     )
 
@@ -153,6 +153,7 @@ def wrongFour():
         print("Message sent successfully.")
     else:
         print(f"Message failed with error: {responseData['messages'][0]['error-text']}")
+    
     return render_template('wrong.html', numbers = randoms)
 
 #wrong.html에서 다시 시작하기 버튼 눌렀을 때
