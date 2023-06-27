@@ -10,7 +10,6 @@ password = "1234"
 client = vonage.Client(key="f5208b3e", secret="Z8Lwf9rOOWjuHKyx")
 sms = vonage.Sms(client)
 
-
 #메인화면, 첫 번째 패스워드 입력창
 @app.route('/',methods=['GET','POST'])
 def main():
@@ -90,18 +89,18 @@ def four():
         random_list = list(range(0,10))
         password = ''.join(str(s) for s in random.sample(random_list, 4))
         print(password)
-        # responseData = sms.send_message(
-        # {
-        #     "from": "Vonage APIs",
-        #     "to": "821028429552",
-        #     "text": "Doorlock has been unlocked. New password: " + password,
-        # }
-        # )
+        responseData = sms.send_message(
+        {
+            "from": "Vonage APIs",
+            "to": "821028429552",
+            "text": "Doorlock has been unlocked. New password: " + password,
+        }
+        )
 
-        # if responseData["messages"][0]["status"] == "0":
-        #     print("Message sent successfully.")
-        # else:
-        #     print(f"Message failed with error: {responseData['messages'][0]['error-text']}")
+        if responseData["messages"][0]["status"] == "0":
+            print("Message sent successfully.")
+        else:
+            print(f"Message failed with error: {responseData['messages'][0]['error-text']}")
         return render_template('correct.html')
     else:
         return render_template('wrong.html') #마지막에 틀리면 wrong view 리턴
@@ -149,18 +148,18 @@ def wrongFour():
     random_list.append('#')
     randoms = random.sample(random_list, 12)
 
-    # responseData = sms.send_message(
-    # {
-    #     "from": "Vonage APIs",
-    #     "to": "821028429552",
-    #     "text": "Doorlock password input detected.",
-    # }
-    # )
+    responseData = sms.send_message(
+    {
+        "from": "Vonage APIs",
+        "to": "821028429552",
+        "text": "Doorlock password input detected.",
+    }
+    )
 
-    # if responseData["messages"][0]["status"] == "0":
-    #     print("Message sent successfully.")
-    # else:
-    #     print(f"Message failed with error: {responseData['messages'][0]['error-text']}")
+    if responseData["messages"][0]["status"] == "0":
+        print("Message sent successfully.")
+    else:
+        print(f"Message failed with error: {responseData['messages'][0]['error-text']}")
     
     return render_template('wrong.html')
 
