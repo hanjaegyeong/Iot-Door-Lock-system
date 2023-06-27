@@ -52,6 +52,7 @@ def two():
     random_list.append('#')
     randoms = random.sample(random_list, 12)
 
+
     if password[1] == number:
         return render_template('doorlock_three.html', numbers = randoms)
     else:
@@ -110,6 +111,7 @@ def four():
 @app.route('/wrong_two',methods=['GET','POST'])
 def wrongTwo():
     number = request.args["number"]
+
     now = datetime.now()
     input_time = now.strftime("%Y-%m-%d %H:%M:%S")
     log_list.append([number, input_time])
@@ -123,7 +125,10 @@ def wrongTwo():
 @app.route('/wrong_three',methods=['GET','POST'])
 def wrongThree():
     number = request.args["number"]
-    log_list.append(number)
+
+    now = datetime.now()
+    input_time = now.strftime("%Y-%m-%d %H:%M:%S")
+    log_list.append([number, input_time])
     
     random_list = list(range(0,10))
     random_list.append('*')
@@ -133,8 +138,11 @@ def wrongThree():
 
 @app.route('/wrong_four',methods=['GET','POST'])
 def wrongFour():
-    number = request.args["number"]
-    log_list.append(number)
+    number = request.args["number"]   
+
+    now = datetime.now()
+    input_time = now.strftime("%Y-%m-%d %H:%M:%S")
+    log_list.append([number, input_time])
     
     random_list = list(range(0,10))
     random_list.append('*')
