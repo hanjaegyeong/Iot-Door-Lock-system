@@ -2,29 +2,53 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>IoT Door Lock System</title>
+    <!-- 부트스트랩 CDN 링크 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
     <style>
-      div {
-        margin-left:300px;
-        margin-top:60px;
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        margin-top: 60px;
+        text-align: center;
       }
-      input {
-        height: 80px;width: 150px;font-size:40px;
+
+      .lock-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .lock-button {
+        width: 145px;
+        height: 90px;
+        margin: 7px;
+        border-radius: 10px;
+        font-size: 39px;
+        font-family: "Digital", sans-serif;
+        background-color: #121212; /* 배경색을 동일하게 설정합니다. */
+        color: white;
       }
     </style>
   </head>
 
   <body>
-    <div>
-      <span style="font-size:50px">correct</span>
-      <form action="/log" method="post">
-        <input type="submit" value="Log" name="input"/>
-      </form>
-      <form action="/again" method="post">
-        <input type="submit" value="Again" name="input"/>
-      </form>
+    <div class="lock-container">
+      <span style="font-size:50px;color:azure">correct</span>
+      <div class="button-container">
+        <form action="/log" method="post">
+          <input type="submit" value="Log" name="input" class="lock-button" />
+        </form>
+        <form action="/again" method="post">
+          <input type="submit" value="Again" name="input" class="lock-button" />
+        </form>
+      </div>
     </div>
   </body>
 </html>

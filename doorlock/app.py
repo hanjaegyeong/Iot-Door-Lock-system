@@ -154,7 +154,7 @@ def wrongFour():
     else:
         print(f"Message failed with error: {responseData['messages'][0]['error-text']}")
     
-    return render_template('wrong.html', numbers = randoms)
+    return render_template('wrong.html')
 
 #wrong.html에서 다시 시작하기 버튼 눌렀을 때
 @app.route('/again', methods=['GET', 'POST'])
@@ -170,6 +170,11 @@ def tmp():
 @app.route('/log',methods=['GET','POST'])
 def log():
     return render_template('log.html', log_list = log_list)
+
+@app.route('/init',methods=['POST'])
+def init():
+    password = '1234'
+    return render_template('wrong.html')
 
 if __name__ == '__main__':
    app.run(port = 5000, debug = True)

@@ -3,23 +3,52 @@
   <head>
     <meta charset="utf-8">
     <title>IoT Door Lock System</title>
+    <!-- 부트스트랩 CDN 링크 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
     <style>
-      div {
-        margin-left:300px;
-        margin-top:60px;
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        margin-top: 60px;
+        text-align: center;
       }
-      input {
-        height: 80px;width: 150px;font-size:40px;
+
+      .lock-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .lock-button {
+        width: 145px;
+        height: 90px;
+        margin: 7px;
+        border-radius: 10px;
+        font-size: 39px;
+        font-family: "Digital", sans-serif;
+        background-color: #121212; /* 배경색을 동일하게 설정합니다. */
+        color: white;
       }
     </style>
   </head>
 
   <body>
-    <div>
-    <span style="font-size:50px">wrong</span>
-    <form action="/again" method="post">
-      <input type="submit" value="Again" name="input"/>
-    </form>
+    <div class="lock-container">
+      <span style="font-size:50px;color:azure">wrong</span>
+      <div class="button-container">
+        <form action="/again" method="post">
+          <input type="submit" value="Again" name="input" class="lock-button" />
+        </form>
+        <form action="/init" method="post">
+          <input type="submit" value="Init" name="input" class="lock-button" />
+        </form>
+      </div>
     </div>
   </body>
 </html>
